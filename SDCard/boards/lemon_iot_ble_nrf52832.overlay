@@ -19,20 +19,20 @@
 };
 
 &spi1 {
-        compatible = "nordic,nrf-spi";
-        status = "okay";
-        cs-gpios = <&gpio0 14 GPIO_ACTIVE_LOW>;
+	compatible = "nordic,nrf-spi";
+	status = "okay";
+	cs-gpios = <&gpio0 14 GPIO_ACTIVE_LOW>;
 	pinctrl-0 = <&spi1_default>;
 	pinctrl-1 = <&spi1_sleep>;
 	pinctrl-names = "default", "sleep";
-        sdhc0: sdhc@0 {
-                compatible = "zephyr,sdhc-spi-slot";
-                reg = <0>;
-                status = "okay";
-                mmc {
-                    compatible = "zephyr,sdmmc-disk";
-                    status = "okay";
-                };
-                spi-max-frequency = <5000000>;
-        };
+	sdhc0: sdhc@0 {
+		compatible = "zephyr,sdhc-spi-slot";
+		reg = <0>;
+		status = "okay";
+		mmc {
+			compatible = "zephyr,sdmmc-disk";
+			status = "okay";
+		};
+		spi-max-frequency = <5000000>;
+	};
 };
