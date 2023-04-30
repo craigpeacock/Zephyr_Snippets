@@ -16,6 +16,8 @@
 #include <zephyr/device.h>
 #include <zephyr/kernel.h>
 #include <zephyr/drivers/counter.h>
+#include <zephyr/pm/device.h>
+#include <zephyr/pm/device_runtime.h>
 
 #define ALARM_CHANNEL_ID 0
 
@@ -54,6 +56,8 @@ void main(void)
 
 	printk("Number of counters: %d\n", counter_get_num_of_channels(counter_dev));
 	printk("Counter frequency: %dHz\n", counter_get_frequency(counter_dev));
+	printk("Wakeup Capable: %s\n", pm_device_wakeup_is_capable(counter_dev) ? "Yes" : "No");
+	printk("Wakeup Source: %s\n", pm_device_wakeup_is_enabled(counter_dev) ? "Enabled" : "Disabled");
 
 	counter_start(counter_dev);
 	
