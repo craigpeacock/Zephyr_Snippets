@@ -1,0 +1,13 @@
+/ { 
+	rtc_emul: rtc {
+		status = "okay";
+		compatible = "zephyr,rtc-emul";
+		alarms-count = <2>;
+	};
+
+	aliases {
+		rtc = &rtc_emul;
+	};
+};
+
+
