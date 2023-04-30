@@ -2,8 +2,9 @@
 
 Zephyr has support for Real-time clock and Real-time counter. 
 
-The clock provides a broken-down time format, while the counter provides a low power counter that can be used to track time.
+The clock provides a broken-down time format, while the counter provides a low power counter that can be used to track time. Both rely on hardware thatcan be used to wake-up the system. 
 
+The following links are to Zephyr documentation (including API): 
  * https://docs.zephyrproject.org/latest/hardware/peripherals/counter.html
  * https://docs.zephyrproject.org/latest/hardware/peripherals/rtc.html
 
@@ -38,7 +39,7 @@ west build -b nucleo_f411re
 
 To flash, run:
 
-``
+```
 west flash
 ```
 
