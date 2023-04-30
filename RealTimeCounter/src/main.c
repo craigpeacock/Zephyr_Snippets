@@ -19,6 +19,27 @@
 
 #define ALARM_CHANNEL_ID 0
 
+static void alarm_callback(const struct device *counter_dev, uint8_t chan_id, uint32_t ticks, void *user_data)
+{
+	printk("Alarm\n");
+}
+
+void set_alarm(const struct device *dev)
+{
+	struct counter_alarm_cfg alarm_cfg;
+
+	alarm_cfg.flags = 0;
+	alarm_cfg.ticks = 10;
+	alarm_cfg.callback = alarm_callback;
+	alarm_cfg.user_data = &alarm_cfg;
+
+	if (counter_set_channel_alarm(dev, ALARM_CHANNEL_ID, &alarm_cfg) == 0) 
+	{
+		printk("Successfully set alarm\n");
+	}
+}
+
+
 void main(void)
 {
 	const struct device *const counter_dev = DEVICE_DT_GET(DT_INST(0, st_stm32_rtc));
@@ -35,6 +56,8 @@ void main(void)
 	printk("Counter frequency: %dHz\n", counter_get_frequency(counter_dev));
 
 	counter_start(counter_dev);
+	
+	set_alarm(counter_dev);
 
 	while (1) {
 		if (counter_get_value(counter_dev, &ticks) == 0) {
