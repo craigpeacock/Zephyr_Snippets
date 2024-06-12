@@ -1,15 +1,18 @@
 
 #include <stdio.h>
 #include <string.h>
+#include <stdlib.h>
+#include <errno.h>
 #include <zephyr/device.h>
 #include <zephyr/kernel.h>
 #include <zephyr/logging/log.h>
 #include <cJSON.h>
 #include <cJSON_os.h>
+#include "json.h"
 
 LOG_MODULE_REGISTER(cJSON);
 
-void main(void)
+int main(void)
 {
 	printk("Zephyr cJSON Example \nBoard: %s\n", CONFIG_BOARD);
 
