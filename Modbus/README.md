@@ -2,11 +2,11 @@
 
 * [Zephyr Modbus RTU client Documentation](https://docs.zephyrproject.org/latest/samples/subsys/modbus/rtu_client/README.html)
 
-It has been noted this framework doesn't work well under load, resulting in CRC mismatches & random RX timeouts etc. Discussion can be found [here.](https://github.com/zephyrproject-rtos/zephyr/pull/74029)
+It has been noted this framework doesn't work well under load, resulting in CRC mismatches & random RX timeouts etc. Discussion can be found [here.](https://github.com/zephyrproject-rtos/zephyr/pull/74029) I have observed the same behaviour.
 
 ## Device Tree
 
-This example comes with a app.overlay file describing the RS-485 hardware. The UART interface is found via the "zephyr,modbus-serial" statement. The DE (Data Enable) & RE (Receive Enable) lines are configured using de-gpio & re-gpio properties. 
+This example comes with a app.overlay file describing the RS-485 hardware. The UART interface is found via the "zephyr,modbus-serial" statement. The DE (Driver Enable) & RE (Receiver Enable) lines are configured using de-gpio & re-gpio properties.
 
 ```
 &uart1 {
