@@ -62,7 +62,7 @@ void my_nvs_load_system_params(void)
 
 	ret = nvs_read(&fs, NVS_SYSTEM_PARAMS, &system_params, sizeof(system_params));
 	if (ret != sizeof(system_params)) {
-		LOG_ERR("Unable to read system parameters. Resetting to default");
+		LOG_ERR("Unable to read system parameters (Error %d). Resetting to default.", ret);
 		// Add default parameters here
 		system_params.enabled = true;
 		system_params.state = 3;
@@ -79,7 +79,7 @@ void my_nvs_save_system_params(void)
 {
 	ssize_t bytes_written = nvs_write(&fs, NVS_SYSTEM_PARAMS, &system_params, sizeof(system_params));
 	if (bytes_written != sizeof(system_params)) {
-		LOG_ERR("Unable to save system parameters (%d)", bytes_written);
+		LOG_ERR("Unable to save system parameters (Error %d)", bytes_written);
 	} else {
 		LOG_INF("Saved %d bytes", bytes_written);
 	}
@@ -99,7 +99,7 @@ void my_nvs_load_string(uint16_t id, char *default_name, char **string)
 
 	ret = nvs_read(&fs, id, *string, MAX_STRING_SIZE);
 	if (ret <= 0) {
-		LOG_ERR("Error %d reading NVS id %d", ret, id);
+		LOG_ERR("Unable to read string ID %d (Error %d). Resetting to default.", id, ret);
 		strcpy(*string, default_name);
 		my_nvs_save_string(id, *string, strlen(*string));
 	} else {
@@ -113,7 +113,7 @@ void my_nvs_save_string(uint16_t id, const void *name, size_t len)
 {
 	ssize_t bytes_written = nvs_write(&fs, id, name, len);
 	if (bytes_written != len) {
-		LOG_ERR("Unable to save NVS id %d", id);
+		LOG_ERR("Unable to save string ID %d (Error %d)", id, bytes_written);
 	} else {
 		LOG_INF("Saved %d bytes", bytes_written);
 	}

@@ -54,7 +54,7 @@ int main(void)
 	system_params.enabled = true;
 	system_params.state = 4;
 
-	LOG_INF("1. Address of Structure %X", (unsigned int)&system_params);
+	LOG_INF("1. Address of Structure %X, String Addr = %X", (unsigned int)&system_params, (unsigned int)system_params.name);
 
 	my_nvs_init();
 	my_nvs_load_system_params();
