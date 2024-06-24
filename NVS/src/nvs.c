@@ -88,16 +88,27 @@ void my_nvs_save_system_params(void)
 void my_nvs_load_string(uint16_t id, char *default_name, char **string)
 {
 	int ret;
+	size_t len;
 
 	if (*string != NULL) {
 		LOG_INF("Freeing old string at %X", (unsigned int)*string);
 		free(*string);
 	}
 
-	// Allocate new buffer
-	LOG_INF("Allocated new string at %X", (unsigned int)(*string = malloc(MAX_STRING_SIZE + 1)));
+	// Obtain string size
+	ret = nvs_read(&fs, id, NULL, 0);
+	if (ret <= 0) {
+		len = strlen(default_name);
+	} else {
+		len = ret;
+	}
 
-	ret = nvs_read(&fs, id, *string, MAX_STRING_SIZE);
+	LOG_INF("New string is %d bytes long", len);
+
+	// Allocate new buffer
+	LOG_INF("Allocated new string at %X", (unsigned int)(*string = malloc(len + 1)));
+
+	ret = nvs_read(&fs, id, *string, len);
 	if (ret <= 0) {
 		LOG_ERR("Unable to read string ID %d (Error %d). Resetting to default.", id, ret);
 		strcpy(*string, default_name);

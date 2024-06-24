@@ -33,6 +33,8 @@ void initialise_string(char **string, char *init_string)
 
 void modify_string(char **string)
 {
+	size_t len;
+
 	LOG_INF("String Pointer = %X", (unsigned int)string);
 
 	if (*string != NULL) {
@@ -40,8 +42,10 @@ void modify_string(char **string)
 		free(*string);
 	}
 
+	len = strlen("HELLO");
+
 	// Allocate new buffer
-	LOG_INF("Allocated new string at %X", (unsigned int)(*string = malloc(MAX_STRING_SIZE + 1)));
+	LOG_INF("Allocated new string at %X", (unsigned int)(*string = malloc(len + 1)));
 	
 	// Copy contents
 	sprintf(*string, "Hello");

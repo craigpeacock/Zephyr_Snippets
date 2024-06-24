@@ -7,7 +7,7 @@
 #define NVS_STRING1_ID			1
 #define NVS_STRING2_ID			2
 
-#define MAX_STRING_SIZE			16
+#define MAX_STRING_SIZE			64
 
 void my_nvs_init(void);
 
