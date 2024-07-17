@@ -1,0 +1,49 @@
+[00:00:00.377,410] <inf> wifi_nrf_bus: SPIM spi@40004000: freq = 8 MHz
+[00:00:00.377,441] <inf> wifi_nrf_bus: SPIM spi@40004000: latency = 0
+[00:00:00.382,812] <dbg> wifi_nrf: zep_shim_pr_dbg: Signature: 0xdead1eaf
+[00:00:00.382,843] <dbg> wifi_nrf: zep_shim_pr_dbg: num_images: 4
+[00:00:00.382,904] <dbg> wifi_nrf: zep_shim_pr_dbg: version: 0x1020a04
+[00:00:00.382,965] <dbg> wifi_nrf: zep_shim_pr_dbg: feature_flags: 4
+[00:00:00.382,995] <dbg> wifi_nrf: zep_shim_pr_dbg: ====
+[00:00:00.383,056] <dbg> wifi_nrf: zep_shim_pr_dbg: image[0] type: 0
+[00:00:00.383,117] <dbg> wifi_nrf: zep_shim_pr_dbg: image[0] len: 376
+[00:00:00.383,148] <dbg> wifi_nrf: zep_shim_pr_dbg: ====
+[00:00:00.383,209] <dbg> wifi_nrf: zep_shim_pr_dbg: image[1] type: 1
+[00:00:00.383,270] <dbg> wifi_nrf: zep_shim_pr_dbg: image[1] len: 13632
+[00:00:00.383,300] <dbg> wifi_nrf: zep_shim_pr_dbg: ====
+[00:00:00.383,361] <dbg> wifi_nrf: zep_shim_pr_dbg: image[2] type: 2
+[00:00:00.383,392] <dbg> wifi_nrf: zep_shim_pr_dbg: image[2] len: 460
+[00:00:00.383,453] <dbg> wifi_nrf: zep_shim_pr_dbg: ====
+[00:00:00.383,483] <dbg> wifi_nrf: zep_shim_pr_dbg: image[3] type: 3
+[00:00:00.383,544] <dbg> wifi_nrf: zep_shim_pr_dbg: image[3] len: 10556
+[00:00:00.383,575] <dbg> wifi_nrf: zep_shim_pr_dbg: ====
+[00:00:00.384,338] <dbg> wifi_nrf: zep_shim_pr_dbg: hal_fw_patch_load: Copying patch UMAC-bimg: chunk 1/1, size: 376
+[00:00:00.385,742] <dbg> wifi_nrf: zep_shim_pr_dbg: hal_fw_patch_load: Copying patch UMAC-bin: chunk 1/2, size: 8192
+[00:00:00.394,592] <dbg> wifi_nrf: zep_shim_pr_dbg: hal_fw_patch_load: Copying patch UMAC-bin: chunk 2/2, size: 5440
+[00:00:00.400,146] <dbg> wifi_nrf: zep_shim_pr_dbg: nrf_wifi_fmac_fw_load: UMAC patches loaded
+
+[00:00:00.400,329] <dbg> wifi_nrf: zep_shim_pr_dbg: hal_fw_patch_load: Copying patch LMAC-bimg: chunk 1/1, size: 460
+[00:00:00.401,763] <dbg> wifi_nrf: zep_shim_pr_dbg: hal_fw_patch_load: Copying patch LMAC-bin: chunk 1/2, size: 8192
+[00:00:00.410,339] <dbg> wifi_nrf: zep_shim_pr_dbg: hal_fw_patch_load: Copying patch LMAC-bin: chunk 2/2, size: 2364
+[00:00:00.412,872] <dbg> wifi_nrf: zep_shim_pr_dbg: nrf_wifi_fmac_fw_load: LMAC patches loaded
+
+[00:00:00.434,936] <dbg> wifi_nrf: nrf_wifi_fmac_dev_add_zep: Firmware (v1.2.10.4) booted successfully
+[00:00:00.440,765] <dbg> wifi_nrf: zep_shim_pr_dbg: RPU LPM type: HW
+[00:00:00.443,634] <dbg> wifi_nrf: zep_shim_pr_dbg: nrf_wifi_fmac_event_callback: Event type 0 recd
+[00:00:00.444,091] <dbg> wifi_nrf: nrf_wifi_if_start_zep: nrf_wifi_if_start_zep: FMAC device added
+[00:00:00.445,220] <dbg> wifi_nrf: zep_shim_pr_dbg: umac_cmd_cfg: Command 52 sent to RPU
+[00:00:00.445,892] <dbg> wifi_nrf: zep_shim_pr_dbg: nrf_wifi_fmac_event_callback: Event type 3 recd
+[00:00:00.445,983] <dbg> wifi_nrf: zep_shim_pr_dbg: umac_event_ctrl_process: Event 292 received from UMAC
+[00:00:00.446,075] <dbg> wifi_nrf: zep_shim_pr_dbg: umac_event_ctrl_process: No callback registered for event 292
+[00:00:00.446,136] <dbg> wifi_nrf: zep_shim_pr_dbg: umac_event_ctrl_process: Event 292 processed
+[00:00:00.448,181] <dbg> wifi_nrf: zep_shim_pr_dbg: umac_cmd_cfg: Command 18 sent to RPU
+[00:00:00.564,270] <dbg> wifi_nrf: zep_shim_pr_dbg: nrf_wifi_fmac_event_callback: Event type 2 recd
+[00:00:00.564,331] <dbg> wifi_nrf: zep_shim_pr_dbg: nrf_wifi_fmac_data_event_process: Event 5 received from UMAC
+[00:00:00.564,422] <dbg> wifi_nrf: zep_shim_pr_dbg: nrf_wifi_fmac_event_callback: Event type 3 recd
+[00:00:00.564,514] <dbg> wifi_nrf: zep_shim_pr_dbg: umac_event_ctrl_process: Event 275 received from UMAC
+[00:00:00.564,575] <dbg> wifi_nrf: zep_shim_pr_dbg: umac_event_ctrl_process: Event 275 processed
+*** Booting nRF Connect SDK v3.5.99-ncs1-1 ***
+[00:00:00.564,788] <inf> main: WiFi/Ethernet Example
+[00:00:00.564,819] <inf> main: Board: lemon_iot_ble_nrf52840
+[00:00:00.564,819] <inf> main: Default network interface found
+[00:00:00.564,849] <inf> main: Ethernet MAC Address 02:00:00:00:00:01
