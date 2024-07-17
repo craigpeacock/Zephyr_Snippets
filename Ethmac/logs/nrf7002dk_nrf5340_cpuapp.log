@@ -1,0 +1,76 @@
+[00:00:00.271,636] <dbg> wifi_nrf: zep_shim_pr_dbg: Signature: 0xdead1eaf
+[00:00:00.271,697] <dbg> wifi_nrf: zep_shim_pr_dbg: num_images: 4
+[00:00:00.271,728] <dbg> wifi_nrf: zep_shim_pr_dbg: version: 0x1020a04
+[00:00:00.271,789] <dbg> wifi_nrf: zep_shim_pr_dbg: feature_flags: 1
+[00:00:00.271,820] <dbg> wifi_nrf: zep_shim_pr_dbg: ====
+[00:00:00.271,850] <dbg> wifi_nrf: zep_shim_pr_dbg: image[0] type: 0
+[00:00:00.271,881] <dbg> wifi_nrf: zep_shim_pr_dbg: image[0] len: 1108
+[00:00:00.271,911] <dbg> wifi_nrf: zep_shim_pr_dbg: ====
+[00:00:00.271,972] <dbg> wifi_nrf: zep_shim_pr_dbg: image[1] type: 1
+[00:00:00.272,003] <dbg> wifi_nrf: zep_shim_pr_dbg: image[1] len: 43656
+[00:00:00.272,033] <dbg> wifi_nrf: zep_shim_pr_dbg: ====
+[00:00:00.272,094] <dbg> wifi_nrf: zep_shim_pr_dbg: image[2] type: 2
+[00:00:00.272,125] <dbg> wifi_nrf: zep_shim_pr_dbg: image[2] len: 904
+[00:00:00.272,155] <dbg> wifi_nrf: zep_shim_pr_dbg: ====
+[00:00:00.272,186] <dbg> wifi_nrf: zep_shim_pr_dbg: image[3] type: 3
+[00:00:00.272,247] <dbg> wifi_nrf: zep_shim_pr_dbg: image[3] len: 28144
+[00:00:00.272,277] <dbg> wifi_nrf: zep_shim_pr_dbg: ====
+[00:00:00.272,949] <dbg> wifi_nrf: zep_shim_pr_dbg: hal_fw_patch_load: Copying patch UMAC-bimg: chunk 1/1, size: 1108
+[00:00:00.273,437] <dbg> wifi_nrf: zep_shim_pr_dbg: hal_fw_patch_load: Copying patch UMAC-bin: chunk 1/6, size: 8192
+[00:00:00.274,566] <dbg> wifi_nrf: zep_shim_pr_dbg: hal_fw_patch_load: Copying patch UMAC-bin: chunk 2/6, size: 8192
+[00:00:00.275,695] <dbg> wifi_nrf: zep_shim_pr_dbg: hal_fw_patch_load: Copying patch UMAC-bin: chunk 3/6, size: 8192
+[00:00:00.276,794] <dbg> wifi_nrf: zep_shim_pr_dbg: hal_fw_patch_load: Copying patch UMAC-bin: chunk 4/6, size: 8192
+[00:00:00.277,923] <dbg> wifi_nrf: zep_shim_pr_dbg: hal_fw_patch_load: Copying patch UMAC-bin: chunk 5/6, size: 8192
+[00:00:00.278,930] <dbg> wifi_nrf: zep_shim_pr_dbg: hal_fw_patch_load: Copying patch UMAC-bin: chunk 6/6, size: 2696
+[00:00:00.279,357] <dbg> wifi_nrf: zep_shim_pr_dbg: nrf_wifi_fmac_fw_load: UMAC patches loaded
+
+[00:00:00.279,449] <dbg> wifi_nrf: zep_shim_pr_dbg: hal_fw_patch_load: Copying patch LMAC-bimg: chunk 1/1, size: 904
+[00:00:00.279,907] <dbg> wifi_nrf: zep_shim_pr_dbg: hal_fw_patch_load: Copying patch LMAC-bin: chunk 1/4, size: 8192
+[00:00:00.281,036] <dbg> wifi_nrf: zep_shim_pr_dbg: hal_fw_patch_load: Copying patch LMAC-bin: chunk 2/4, size: 8192
+[00:00:00.282,165] <dbg> wifi_nrf: zep_shim_pr_dbg: hal_fw_patch_load: Copying patch LMAC-bin: chunk 3/4, size: 8192
+[00:00:00.283,172] <dbg> wifi_nrf: zep_shim_pr_dbg: hal_fw_patch_load: Copying patch LMAC-bin: chunk 4/4, size: 3568
+[00:00:00.283,660] <dbg> wifi_nrf: zep_shim_pr_dbg: nrf_wifi_fmac_fw_load: LMAC patches loaded
+
+[00:00:00.305,328] <dbg> wifi_nrf: nrf_wifi_fmac_dev_add_zep: Firmware (v1.2.10.4) booted successfully
+[00:00:00.327,484] <dbg> wifi_nrf: zep_shim_pr_dbg: RPU LPM type: HW
+[00:00:00.329,864] <dbg> wifi_nrf: zep_shim_pr_dbg: nrf_wifi_fmac_event_callback: Event type 0 recd
+[00:00:00.330,444] <dbg> wifi_nrf: nrf_wifi_if_start_zep: nrf_wifi_if_start_zep: FMAC device added
+[00:00:00.333,374] <dbg> wifi_nrf: zep_shim_pr_dbg: umac_cmd_cfg: Command 52 sent to RPU
+[00:00:00.333,618] <dbg> wifi_nrf: zep_shim_pr_dbg: nrf_wifi_fmac_event_callback: Event type 3 recd
+[00:00:00.333,648] <dbg> wifi_nrf: zep_shim_pr_dbg: umac_event_ctrl_process: Event 292 received from UMAC
+[00:00:00.333,709] <dbg> wifi_nrf: zep_shim_pr_dbg: umac_event_ctrl_process: Command 52 -> status 0
+[00:00:00.333,770] <dbg> wifi_nrf: zep_shim_pr_dbg: umac_event_ctrl_process: Event 292 processed
+[00:00:00.334,350] <dbg> wifi_nrf: zep_shim_pr_dbg: umac_cmd_cfg: Command 18 sent to RPU
+[00:00:00.450,164] <dbg> wifi_nrf: zep_shim_pr_dbg: nrf_wifi_fmac_event_callback: Event type 2 recd
+[00:00:00.450,225] <dbg> wifi_nrf: zep_shim_pr_dbg: nrf_wifi_fmac_data_event_process: Event 5 received from UMAC
+[00:00:00.450,225] <dbg> wifi_nrf: nrf_wifi_if_carr_state_chg: nrf_wifi_if_carr_state_chg: Carrier state: 0
+[00:00:00.450,347] <dbg> wifi_nrf: zep_shim_pr_dbg: nrf_wifi_fmac_event_callback: Event type 3 recd
+[00:00:00.450,378] <dbg> wifi_nrf: zep_shim_pr_dbg: umac_event_ctrl_process: Event 275 received from UMAC
+[00:00:00.450,439] <dbg> wifi_nrf: zep_shim_pr_dbg: umac_event_ctrl_process: Event 275 processed
+[00:00:00.453,186] <dbg> wifi_nrf: zep_shim_pr_dbg: umac_cmd_cfg: Command 33 sent to RPU
+*** Booting nRF Connect SDK v3.5.99-ncs1-1 ***
+[00:00:00.454,010] <inf> net_config: Initializing network
+[00:00:00.454,040] <inf> net_config: Waiting interface 1 (0x200014b0) to be up...
+[00:00:00.454,132] <dbg> wifi_nrf: zep_shim_pr_dbg: nrf_wifi_fmac_event_callback: Event type 3 recd
+[00:00:00.454,193] <dbg> wifi_nrf: zep_shim_pr_dbg: umac_event_ctrl_process: Event 292 received from UMAC
+[00:00:00.454,223] <dbg> wifi_nrf: zep_shim_pr_dbg: umac_event_ctrl_process: Command 33 -> status 0
+[00:00:00.454,284] <dbg> wifi_nrf: zep_shim_pr_dbg: umac_event_ctrl_process: Event 292 processed
+[00:00:00.456,115] <dbg> wifi_nrf: zep_shim_pr_dbg: umac_cmd_cfg: Command 29 sent to RPU
+[00:00:00.456,817] <dbg> wifi_nrf: zep_shim_pr_dbg: umac_cmd_cfg: Command 29 sent to RPU
+[00:00:00.457,550] <dbg> wifi_nrf: zep_shim_pr_dbg: umac_cmd_cfg: Command 29 sent to RPU
+[00:00:00.458,343] <dbg> wifi_nrf: zep_shim_pr_dbg: umac_cmd_cfg: Command 41 sent to RPU
+[00:00:00.461,151] <dbg> wifi_nrf: zep_shim_pr_dbg: nrf_wifi_fmac_event_callback: Event type 3 recd
+[00:00:00.461,212] <dbg> wifi_nrf: zep_shim_pr_dbg: umac_event_ctrl_process: Event 282 received from UMAC
+[00:00:00.461,578] <dbg> wifi_nrf: zep_shim_pr_dbg: umac_event_ctrl_process: Event 282 processed
+[00:00:00.464,782] <dbg> wifi_nrf: zep_shim_pr_dbg: umac_cmd_cfg: Command 21 sent to RPU
+[00:00:00.465,026] <dbg> wifi_nrf: zep_shim_pr_dbg: nrf_wifi_fmac_event_callback: Event type 3 recd
+[00:00:00.465,057] <dbg> wifi_nrf: zep_shim_pr_dbg: umac_event_ctrl_process: Event 292 received from UMAC
+[00:00:00.465,118] <dbg> wifi_nrf: zep_shim_pr_dbg: umac_event_ctrl_process: Command 21 -> status -2
+[00:00:00.465,179] <dbg> wifi_nrf: zep_shim_pr_dbg: umac_event_ctrl_process: Event 292 processed
+[00:00:01.454,711] <inf> net_config: Running dhcpv4 client...
+[00:00:01.454,956] <err> net_config: Timeout while waiting network interface
+[00:00:01.454,956] <err> net_config: Network initialization failed (-115)
+[00:00:01.454,986] <inf> main: WiFi/Ethernet Example
+[00:00:01.455,017] <inf> main: Board: nrf7002dk_nrf5340_cpuapp
+[00:00:01.455,017] <inf> main: Default network interface found
+[00:00:01.455,047] <inf> main: Ethernet MAC Address F4:CE:36:00:15:BE
