@@ -1,0 +1,13 @@
+/ {
+	outputs {
+		compatible = "gpio-leds";
+		output0: out0 {
+			gpios = <&gpio0 2 GPIO_ACTIVE_LOW>;
+			label = "Sensor Power Enable";
+		};
+	};
+
+	aliases {
+		pwr-en = &output0;
+	};
+};
