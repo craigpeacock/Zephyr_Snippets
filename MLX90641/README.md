@@ -6,3 +6,5 @@ The example is based on Melexis's Library avaliable from GitHub:
 https://github.com/melexis/mlx90641-library
 
 MLX90641_I2C_Driver.c has been modified to support Zephyr I2C Calls.
+
+API documentation can be found at https://github.com/melexis/mlx90641-library/blob/master/MLX90641%20driver.pdf

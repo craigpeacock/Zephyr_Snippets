@@ -13,6 +13,7 @@
 
 #include "MLX90641_API.h"
 #include "MLX90641_I2C_Driver.h"
+#include "MLX90641_Helper.h"
 #include "gpio.h"
 
 LOG_MODULE_REGISTER(main);
@@ -30,7 +31,7 @@ int main(void)
 
 	static float mlx90641To[192];
 	float tr = 0;
-	float emissivity = 0.95;
+	float emissivity;
 
 	float TempAmb;
 	float TempObj;
@@ -38,9 +39,13 @@ int main(void)
 	LOG_INF("Zephyr MLX90641 (16x12) Thermal Sensor Array Example");
 	LOG_INF("Board: %s", CONFIG_BOARD);
 
-	gpio_init();
-	k_sleep(K_MSEC(100));
 	MLX90641_I2CInit();
+
+	// Apply power to sensor
+	gpio_init();
+
+	MLX90641_display_resolution(addr);
+	MLX90641_display_refresh_rate(addr);
 
 	// Download and extract parameters from EEPROM:
 	ret = MLX90641_DumpEE(addr, mlx90641_eeData);
@@ -63,57 +68,60 @@ int main(void)
 		return(-1);
 	}
 
-	// Trigger Measurement:
-	ret = MLX90641_TriggerMeasurement(addr);
-	if (ret != 0) {
-		LOG_ERR("Error %d triggering measurement", ret);
-	} else {
-		k_msleep(1000);
-	}
+	emissivity = MLX90641_GetEmissivity(&mlx90641_param);
+	LOG_INF("Emissivity = %f", emissivity);
 
-	// Get Frame Data:
-	ret = MLX90641_GetFrameData(addr, mlx90641_frameData);
-	if (ret != 0) {
-		LOG_ERR("Error getting frame data from MLX90641");
-		return(-1);
-	}
+	LOG_INF("Temperature Gradient Coefficent = %f", mlx90641_param.tgc);
 
-	// Get Sensor Power Supply Voltage:
-	LOG_INF("VDD = %.02fV", MLX90641_GetVdd(mlx90641_frameData, &mlx90641_param));
+	// After POR the first valid data is available after 80mS + 2 * 500mS (refresh rate 2Hz) hence 1080mS
+	k_sleep(K_MSEC(1080));
 
-	// Get Ambient Temperature of Sensor:
-	TempAmb = MLX90641_GetTa(mlx90641_frameData, &mlx90641_param);
+	do {
+		//LOG_INF("Getting Frame Data");
 
-	// Reflected Temperature:
-	// The sensor ambient temperature could be used, but some shift depending on the
-	// enclosure might be needed. For a MLX90641 in the open air the shift is -5°C (TA_SHIFT)
-	tr = TempAmb - TA_SHIFT; //reflected temperature based on the sensor ambient temperature
+		// Get Frame Data. Function will block until a new subpage is avaliable - i.e 500mS for default 2Hz Refresh.
+		ret = MLX90641_GetFrameData(addr, mlx90641_frameData);
+		if (ret < 0) {
+			LOG_ERR("Error %d getting frame data", ret);
+		} else {
+			LOG_INF("Updated sub-page %d:", ret);
 
-	// Calculate Array Temperature of Object:
-	MLX90641_CalculateTo(mlx90641_frameData, &mlx90641_param, emissivity, tr, mlx90641To);
+			// Get Sensor Power Supply Voltage:
+			LOG_INF("VDD = %.02fV", MLX90641_GetVdd(mlx90641_frameData, &mlx90641_param));
 
-	// Display Temperatures
-	for(int row = 0; row < 12; row++) {
-		int i = row * 16;
-		LOG_INF("TO%02d, %2.2f, %2.2f, %2.2f, %2.2f, %2.2f, %2.2f, %2.2f, %2.2f, %2.2f, %2.2f, %2.2f, %2.2f, %2.2f, %2.2f, %2.2f, %2.2f",
-			row, 
-			mlx90641To[i + 0], mlx90641To[i + 1], mlx90641To[i + 2], mlx90641To[i + 3],
-			mlx90641To[i + 4], mlx90641To[i + 5], mlx90641To[i + 6], mlx90641To[i + 7],
-			mlx90641To[i + 8], mlx90641To[i + 9], mlx90641To[i + 10], mlx90641To[i + 11],
-			mlx90641To[i + 12], mlx90641To[i + 13], mlx90641To[i + 14], mlx90641To[i + 15]);
-		};
+			// Get Ambient Temperature of Sensor:
+			TempAmb = MLX90641_GetTa(mlx90641_frameData, &mlx90641_param);
 
-	// Average the Array Values
-	float average = 0;
-	for (int i = 0; i < 192; i++) {
-		average = average + mlx90641To[i];
-	}
-	TempObj =  average / 192;
+			// Reflected Temperature:
+			// The sensor ambient temperature could be used, but some shift depending on the
+			// enclosure might be needed. For a MLX90641 in the open air the shift is -5°C (TA_SHIFT)
+			tr = TempAmb - TA_SHIFT; //reflected temperature based on the sensor ambient temperature
 
-	LOG_INF("Averaged Object Temp %.02lf degC, Ambient Temp %.02lf degC", TempObj, TempAmb);
+			// Calculate Array Temperature of Object:
+			MLX90641_CalculateTo(mlx90641_frameData, &mlx90641_param, emissivity, tr, mlx90641To);
 
-	while (1) {
-		k_sleep(K_SECONDS(10));
-	}
+			// Display Temperatures
+			for(int row = 0; row < 12; row++) {
+				int i = row * 16;
+				LOG_INF("TO%02d, %2.2f, %2.2f, %2.2f, %2.2f, %2.2f, %2.2f, %2.2f, %2.2f, %2.2f, %2.2f, %2.2f, %2.2f, %2.2f, %2.2f, %2.2f, %2.2f",
+					row, 
+					mlx90641To[i + 0], mlx90641To[i + 1], mlx90641To[i + 2], mlx90641To[i + 3],
+					mlx90641To[i + 4], mlx90641To[i + 5], mlx90641To[i + 6], mlx90641To[i + 7],
+					mlx90641To[i + 8], mlx90641To[i + 9], mlx90641To[i + 10], mlx90641To[i + 11],
+					mlx90641To[i + 12], mlx90641To[i + 13], mlx90641To[i + 14], mlx90641To[i + 15]);
+				};
+
+			// Average the Array Values
+			float average = 0;
+			for (int i = 0; i < 192; i++) {
+				average = average + mlx90641To[i];
+			}
+			TempObj =  average / 192;
+
+			LOG_INF("Averaged Object Temp %.02lf degC, Ambient Temp %.02lf degC", TempObj, TempAmb);
+		}
+
+		//k_sleep(K_SECONDS(1));
+
+	} while (1);
 }
-

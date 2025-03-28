@@ -1,7 +1,0 @@
-{
-    "files.associations": {
-        "i2c.h": "c",
-        "kernel.h": "c",
-        "device.h": "c"
-    }
-}
