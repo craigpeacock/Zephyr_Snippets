@@ -44,8 +44,8 @@ int main(void)
 	// Apply power to sensor
 	gpio_init();
 
-	MLX90641_display_resolution(addr);
-	MLX90641_display_refresh_rate(addr);
+	MLX90641_DisplayResolution(addr);
+	MLX90641_DisplayRefreshRate(addr);
 
 	// Download and extract parameters from EEPROM:
 	ret = MLX90641_DumpEE(addr, mlx90641_eeData);
@@ -54,13 +54,8 @@ int main(void)
 		return(-1);
 	}
 
-#ifdef DUMP_EEPROM
-	// Dump EEPROM
-	for (int i = 0; i <= 64; i++) {
-		LOG_INF("0x%04X = 0x%04X", i + 0x2400, mlx90641_eeData[i]);
-		k_sleep(K_MSEC(10));
-	}
-#endif
+	MLX90641_DisplayDeviceID(mlx90641_eeData);
+	MLX90641_DisplayEEPROM(mlx90641_eeData);
 
 	ret = MLX90641_ExtractParameters(mlx90641_eeData, &mlx90641_param);
 	if (ret != 0) {
@@ -77,8 +72,6 @@ int main(void)
 	k_sleep(K_MSEC(1080));
 
 	do {
-		//LOG_INF("Getting Frame Data");
-
 		// Get Frame Data. Function will block until a new subpage is avaliable - i.e 500mS for default 2Hz Refresh.
 		ret = MLX90641_GetFrameData(addr, mlx90641_frameData);
 		if (ret < 0) {
@@ -120,8 +113,6 @@ int main(void)
 
 			LOG_INF("Averaged Object Temp %.02lf degC, Ambient Temp %.02lf degC", TempObj, TempAmb);
 		}
-
-		//k_sleep(K_SECONDS(1));
 
 	} while (1);
 }
