@@ -18,7 +18,20 @@
 
 LOG_MODULE_REGISTER(main);
 
+// As the IR signal received by the sensor has two components:
+// 	1. IR signal emitted by the object
+// 	2. IR signal reflected from the object (the source of this signal is surrounding 
+// environment of the sensor)
+// In order to compensate correctly for the emissivity and achieve best accuracy we need to
+// know the surrounding temperature which is responsible for the second component of the IR
+// signal namely the reflected part - 𝑇𝑟. In case this 𝑇𝑟 temperature is not available and
+// cannot be provided it might be replaced by 𝑇𝑟 ≈ 𝑇𝑎 − 5.
 #define TA_SHIFT 5  // For a MLX90641 in the open air the shift is -5°C (Page 15, Rev 1.4 Driver Manual)
+// Reflected Temperature:
+// If the object emissivity is less than 1, there might be some temperature reflected from
+// the object. In order for this to be compensated, the user should input this reflected
+// temperature. The sensor ambient temperature could be used, but some shift depending on
+// the enclosure might be needed. For a MLX90641 in the open air the shift is -5°C (TA_SHIFT)
 
 int main(void)
 {
@@ -85,9 +98,6 @@ int main(void)
 			// Get Ambient Temperature of Sensor:
 			TempAmb = MLX90641_GetTa(mlx90641_frameData, &mlx90641_param);
 
-			// Reflected Temperature:
-			// The sensor ambient temperature could be used, but some shift depending on the
-			// enclosure might be needed. For a MLX90641 in the open air the shift is -5°C (TA_SHIFT)
 			tr = TempAmb - TA_SHIFT; //reflected temperature based on the sensor ambient temperature
 
 			// Calculate Array Temperature of Object:
