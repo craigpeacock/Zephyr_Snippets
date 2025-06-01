@@ -219,50 +219,64 @@ static void port0_notify(const struct device *dev,
 	struct port0_data_t *dpm_data = usbc_get_dpm_data(dev);
 
 	switch (policy_notify) {
-	case PROTOCOL_ERROR:
-		break;
-	case MSG_DISCARDED:
-		break;
-	case MSG_ACCEPT_RECEIVED:
-		break;
-	case MSG_REJECTED_RECEIVED:
-		break;
-	case MSG_NOT_SUPPORTED_RECEIVED:
-		break;
-	case TRANSITION_PS:
-		atomic_set_bit(&dpm_data->ps_ready, 0);
-		break;
-	case PD_CONNECTED:
-		break;
-	case NOT_PD_CONNECTED:
-		break;
-	case POWER_CHANGE_0A0:
-		LOG_INF("PWR 0A");
-		break;
-	case POWER_CHANGE_DEF:
-		LOG_INF("PWR DEF");
-		break;
-	case POWER_CHANGE_1A5:
-		LOG_INF("PWR 1A5");
-		break;
-	case POWER_CHANGE_3A0:
-		LOG_INF("PWR 3A0");
-		break;
-	case DATA_ROLE_IS_UFP:
-		break;
-	case DATA_ROLE_IS_DFP:
-		break;
-	case PORT_PARTNER_NOT_RESPONSIVE:
-		LOG_INF("Port Partner not PD Capable");
-		break;
-	case SNK_TRANSITION_TO_DEFAULT:
-		break;
-	case HARD_RESET_RECEIVED:
-		break;
-	case SENDER_RESPONSE_TIMEOUT:
-		break;
-	case SOURCE_CAPABILITIES_RECEIVED:
-		break;
+		case PROTOCOL_ERROR:
+			LOG_INF("Protocol Error occurred");
+			break;
+		case MSG_DISCARDED:
+			LOG_INF("Power Delivery discarded the message being transmited");
+			break;
+		case MSG_ACCEPT_RECEIVED:
+			LOG_INF("Power Delivery Accept message was received");
+			break;
+		case MSG_REJECTED_RECEIVED:
+			LOG_INF("Power Delivery Reject message was received");
+			break;
+		case MSG_NOT_SUPPORTED_RECEIVED:
+			LOG_INF("Power Delivery Not Supported message was received");
+			break;
+		case TRANSITION_PS:
+			atomic_set_bit(&dpm_data->ps_ready, 0);
+			LOG_INF("Transition the Power Supply");
+			break;
+		case PD_CONNECTED:
+			LOG_INF("A PD Explicit Contract is in place");
+			break;
+		case NOT_PD_CONNECTED:
+			LOG_INF("No PD Explicit Contract is in place");
+			break;
+		case POWER_CHANGE_0A0:
+			LOG_INF("PWR 0A: Sink SubPower state at 0V");
+			break;
+		case POWER_CHANGE_DEF:
+			LOG_INF("PWR DEF: Sink SubPower state a 5V / 500mA");
+			break;
+		case POWER_CHANGE_1A5:
+			LOG_INF("PWR 1A5: Sink SubPower state a 5V / 1.5A");
+			break;
+		case POWER_CHANGE_3A0:
+			LOG_INF("PWR 3A0: Sink SubPower state a 5V / 3A");
+			break;
+		case DATA_ROLE_IS_UFP:
+			LOG_INF("Data Role has been set to Upstream Facing Port (UFP)");
+			break;
+		case DATA_ROLE_IS_DFP:
+			LOG_INF("Data Role has been set to Downstream Facing Port (DFP)");
+			break;
+		case PORT_PARTNER_NOT_RESPONSIVE:
+			LOG_INF("Port Partner not PD Capable");
+			break;
+		case SNK_TRANSITION_TO_DEFAULT:
+			LOG_INF("Transition the Sink to default");
+			break;
+		case HARD_RESET_RECEIVED:
+			LOG_INF("Hard Reset Received");
+			break;
+		case SENDER_RESPONSE_TIMEOUT:
+			LOG_INF("Sender Response Timeout");
+			break;
+		case SOURCE_CAPABILITIES_RECEIVED:
+			LOG_INF("Source Capabilities Received");
+			break;
 	}
 }
 /* usbc.rst notify end */
@@ -318,6 +332,9 @@ int main(void)
 	usbc_set_policy_cb_get_rdo(usbc_port0, port0_policy_cb_get_rdo);
 	/* usbc.rst register end */
 
+	LOG_INF("Number of Sink Capabilies %d", port0_data.snk_cap_cnt);
+	LOG_INF("Capability = %08X", port0_data.snk_caps[0]);
+	
 	/* usbc.rst user data start */
 	/* Set Application port data object. This object is passed to the policy callbacks */
 	port0_data.ps_ready = ATOMIC_INIT(0);
@@ -326,6 +343,7 @@ int main(void)
 
 	/* usbc.rst usbc start */
 	/* Start the USB-C Subsystem */
+	LOG_INF("Starting the USB-C Subsystem");
 	usbc_start(usbc_port0);
 	/* usbc.rst usbc end */
 
