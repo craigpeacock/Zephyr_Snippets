@@ -3,6 +3,8 @@
 This example is pretty much a copy of the following in-tree zephyr example, with overlays for the [OnSemi FUSB307](https://www.onsemi.com/products/interfaces/usb-type-c/fusb307b) TCPC (Type-C Port Controller)
 https://github.com/zephyrproject-rtos/zephyr/tree/main/samples/subsys/usb_c/sink
 
+Please note, consistent with the above example the build_rdo() will build a Request Data Object and select object position 1 (5V). It doesn't build the RDO from the Source Capabilities stored in the dpm_data object.
+
 ## Example Output
 
 Output when connected to [UGREEN Model CD244 65W GaN Fast Charger](https://www.ugreen.com/products/65w-3-ports-gan-fast-charger?variant=39915659591742):
